@@ -10,7 +10,7 @@ defmodule ArWorldManagerWeb.DetectionImageView do
     %{
       id: detection_image.id,
       image_url: detection_image.image_url,
-      arItems:
+      reality_markers:
         render_many(
           detection_image.reality_markers,
           __MODULE__,
@@ -26,7 +26,7 @@ defmodule ArWorldManagerWeb.DetectionImageView do
       content: reality_marker.content,
       position: return_srp(reality_marker.position),
       scale: reality_marker.scale,
-      euler_angles: return_srp(reality_marker.euler_angles),
+      eulerAngles: return_srp(reality_marker.euler_angles),
       type: reality_marker.type
     }
   end

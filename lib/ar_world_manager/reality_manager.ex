@@ -18,7 +18,9 @@ defmodule ArWorldManager.RealityManager do
 
   """
   def list_detection_images do
-    Repo.all(DetectionImage)
+    DetectionImage
+    |> preload(:reality_markers)
+    |> Repo.all()
   end
 
   @doc """

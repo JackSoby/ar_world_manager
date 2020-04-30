@@ -9,7 +9,7 @@ defmodule ArWorldManagerWeb.DetectionImageController do
 
   def create_detection_image(conn, %{"detection_image" => detection_image}) do
     res = RealityManager.create_detection_image(detection_image)
-    IEx.pry()
+    IO.inspect(res)
     conn
     |> send_resp(200, "")
   end
