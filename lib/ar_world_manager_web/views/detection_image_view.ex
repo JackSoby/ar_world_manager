@@ -28,6 +28,9 @@ defmodule ArWorldManagerWeb.DetectionImageView do
       scale: reality_marker.scale,
       latitude: reality_marker.latitude,
       longitude: reality_marker.longitude,
+      horizontalAccuracy: reality_marker.horizontal_accuracy,
+      verticalAccuracy: reality_marker.vertical_accuracy,
+      altitude: reality_marker.altitude,
       eulerAngles: return_srp(reality_marker.euler_angles),
       type: reality_marker.type
     }
