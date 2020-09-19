@@ -17,6 +17,5 @@ defmodule ArWorldManager.RealityManager.Schema.DetectionImage do
     detection_image
     |> cast(attrs, [:image_url, :longitude, :latitude])
     |> cast_assoc(:reality_markers)
-    |> validate_required([:image_url])
   end
 end

@@ -8,6 +8,7 @@ defmodule ArWorldManager.RealityManager.Schema.RealityMarker do
     field :content, :string
     field :scale, :float
     field :type, :string
+    field :content_url, :string
     field :latitude, :float
     field :longitude, :float
     field :horizontal_accuracy, :float
@@ -24,10 +25,10 @@ defmodule ArWorldManager.RealityManager.Schema.RealityMarker do
   def changeset(reality_marker, attrs) do
     res =
       reality_marker
-      |> cast(attrs, [:type, :scale, :latitude, :longitude, :content, :detection_image_id, :horizontal_accuracy, :vertical_accuracy, :altitude])
+      |> cast(attrs, [:type, :content_url, :scale, :latitude, :longitude,  :detection_image_id, :horizontal_accuracy, :vertical_accuracy, :altitude])
       |> cast_embed(:position)
       |> cast_embed(:euler_angles)
-      |> validate_required([:type,  :content])
+    IO.inspect(res)
 
     res
   end

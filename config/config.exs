@@ -28,3 +28,8 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+
+config :ar_world_manager, ArWorldManager.Guardian,
+       issuer: "ar_world_manager",
+       secret_key: "j+D4DrTcKr0CA5R6F3IPMeqxyrga6U0ikGo+q9C3asgysmcyMs8H661IsTM2Fz5p"

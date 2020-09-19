@@ -1,6 +1,8 @@
 defmodule ArWorldManagerWeb.Router do
   use ArWorldManagerWeb, :router
 
+  alias ArWorldManagerWeb.Guardian
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -19,10 +21,28 @@ defmodule ArWorldManagerWeb.Router do
     get "/", PageController, :index
   end
 
-  scope "/api", ArWorldManagerWeb do
+  pipeline :jwt_authenticated do
+    plug Guardian.AuthPipeline
+  end
+
+  scope "/api/v1", ArWorldManagerWeb do
+    pipe_through :api
+
+
+    post "/sign_up", UserController, :create
+    post "/sign_in", UserController, :sign_in
     post "/create-detection-image", DetectionImageController, :create_detection_image
     get "/get-detection-images", DetectionImageController, :list_detection_images
+    post "/sign_up", UserController, :create
   end
+
+  scope "/api/v1", ArWorldManagerWeb do
+    pipe_through [:api, :jwt_authenticated]
+
+    get "/my_user", UserController, :show
+  end
+
+
 
 
   # Other scopes may use custom stacks.
