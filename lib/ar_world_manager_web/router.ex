@@ -33,13 +33,15 @@ defmodule ArWorldManagerWeb.Router do
     post "/sign_in", UserController, :sign_in
     post "/create-detection-image", DetectionImageController, :create_detection_image
     get "/get-detection-images", DetectionImageController, :list_detection_images
-    post "/sign_up", UserController, :create
+    post "/sign-up", UserController, :create
   end
 
   scope "/api/v1", ArWorldManagerWeb do
     pipe_through [:api, :jwt_authenticated]
+    post "/create-like", LikeController, :create
+    post "/create-comment", CommentController, :create
 
-    get "/my_user", UserController, :show
+    get "/my-user", UserController, :show
   end
 
 

@@ -2,12 +2,13 @@ defmodule ArWorldManager.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias ArWorldManager.Accounts.User
-
+require IEx
   schema "users" do
     field :email, :string
     field :password_hash, :string
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
+    field :username, :string
 
     timestamps()
   end
@@ -15,12 +16,12 @@ defmodule ArWorldManager.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:email, :password, :password_confirmation]) # Remove hash, add pw + pw confirmation
-    |> validate_required([:email, :password, :password_confirmation]) # Remove hash, add pw + pw confirmation
+    |> cast(attrs, [:email, :password, :password_confirmation, :username]) # Remove hash, add pw + pw confirmation
+    |> validate_required([:email, :password, :password_confirmation, :username]) # Remove hash, add pw + pw confirmation
     |> validate_format(:email, ~r/@/) # Check that email is valid
     |> validate_length(:password, min: 8) # Check that password length is >= 8
     |> validate_confirmation(:password) # Check that password === password_confirmation
-    |> unique_constraint(:email)
+    |> unique_constraint([:email, :username])
     |> put_password_hash # Add put_password_hash to changeset pipeline
 
   end

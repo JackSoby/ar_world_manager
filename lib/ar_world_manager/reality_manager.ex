@@ -7,7 +7,10 @@ defmodule ArWorldManager.RealityManager do
   alias ArWorldManager.Repo
 
   alias ArWorldManager.RealityManager.Schema.DetectionImage
+  alias ArWorldManager.RealityManager.Schema.Like
+  alias ArWorldManager.RealityManager.Schema.Comment
 
+  require IEx
   @doc """
   Returns the list of detection_images.
 
@@ -19,7 +22,7 @@ defmodule ArWorldManager.RealityManager do
   """
   def list_detection_images do
     DetectionImage
-    |> preload(:reality_markers)
+    |> preload(reality_markers: [:likes, comments: :user])
     |> Repo.all()
   end
 
@@ -199,4 +202,21 @@ defmodule ArWorldManager.RealityManager do
   def change_reality_marker(%RealityMarker{} = reality_marker) do
     RealityMarker.changeset(reality_marker, %{})
   end
+
+
+  def create_like(attrs \\ %{}) do
+    %Like{}
+    |> Like.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def create_comment(attrs \\ %{}) do
+    %Comment{}
+    |> Comment.changeset(attrs)
+    |> Repo.insert()
+  end
+
+
+
+
 end

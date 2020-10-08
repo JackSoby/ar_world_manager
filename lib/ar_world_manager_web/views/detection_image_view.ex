@@ -33,7 +33,36 @@ defmodule ArWorldManagerWeb.DetectionImageView do
       altitude: reality_marker.altitude,
       eulerAngles: return_srp(reality_marker.euler_angles),
       type: reality_marker.type,
-      contentUrl: reality_marker.content_url
+      contentUrl: reality_marker.content_url,
+      likes: length(reality_marker.likes),
+      comments:  render_many(
+        reality_marker.comments,
+        __MODULE__,
+        "comment.json",
+        as: :comment
+      )
+    }
+  end
+
+  def render("comment.json", %{comment: comment}) do
+    %{
+      id: comment.id,
+      reality_marker_id: comment.reality_marker_id,
+      user: render_one(
+        comment.user,
+        __MODULE__,
+        "user.json",
+        as: :user
+      )
+    }
+  end
+
+
+  def render("user.json", %{user: user}) do
+    %{
+      id: user.id,
+      email: user.email,
+      username: user.username
     }
   end
 
