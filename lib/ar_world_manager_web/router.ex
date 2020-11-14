@@ -28,12 +28,12 @@ defmodule ArWorldManagerWeb.Router do
   scope "/api/v1", ArWorldManagerWeb do
     pipe_through :api
 
+    post "/create-reality-markers", RealityMarkerController, :create_post
+    get "/get-reality-markers", RealityMarkerController, :get_posts
 
-    post "/sign_up", UserController, :create
-    post "/sign_in", UserController, :sign_in
-    post "/create-detection-image", DetectionImageController, :create_detection_image
-    get "/get-detection-images", DetectionImageController, :list_detection_images
-    post "/sign_up", UserController, :create
+    post "/sign-up", UserController, :create
+    post "/sign-in", UserController, :sign_in
+
   end
 
   scope "/api/v1", ArWorldManagerWeb do

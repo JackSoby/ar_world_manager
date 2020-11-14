@@ -12,8 +12,8 @@ defmodule ArWorldManagerWeb.UserController do
     render(conn, "index.json", users: users)
   end
 
-  def sign_in(conn, %{"email" => email, "password" => password}) do
-    case Accounts.token_sign_in(email, password) do
+  def sign_in(conn, %{"user" => %{"username" => username, "password" => password}}) do
+    case Accounts.token_sign_in(username, password) do
       {:ok, token, _claims} ->
         conn |> render("jwt.json", jwt: token)
       _ ->

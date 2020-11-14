@@ -5,6 +5,7 @@ defmodule ArWorldManager.Repo.Migrations.CreateUsers do
     create table(:users) do
       add :email, :string
       add :password_hash, :string
+      add :username, :string
 
       timestamps()
     end
