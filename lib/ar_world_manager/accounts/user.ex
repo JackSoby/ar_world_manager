@@ -21,12 +21,9 @@ require IEx
     |> validate_format(:email, ~r/@/) # Check that email is valid
     |> validate_length(:password, min: 8) # Check that password length is >= 8
     |> validate_confirmation(:password) # Check that password === password_confirmation
-<<<<<<< HEAD
     |> unique_constraint([:email, :username])
-=======
     |> unique_constraint(:email)
     |> unique_constraint(:username)
->>>>>>> master
     |> put_password_hash # Add put_password_hash to changeset pipeline
   end
 
