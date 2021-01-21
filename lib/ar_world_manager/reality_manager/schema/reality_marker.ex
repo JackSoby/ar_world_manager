@@ -5,8 +5,9 @@ defmodule ArWorldManager.RealityManager.Schema.RealityMarker do
   alias ArWorldManager.RealityManager.Schema.DetectionImage
   alias ArWorldManager.RealityManager.Schema.Like
   alias ArWorldManager.RealityManager.Schema.Comment
-
   require IEx
+
+
   schema "reality_markers" do
     field :content, :string
     field :scale, :float
@@ -30,7 +31,7 @@ defmodule ArWorldManager.RealityManager.Schema.RealityMarker do
   def changeset(reality_marker, attrs) do
     res =
       reality_marker
-      |> cast(attrs, [:type, :content_url, :scale, :latitude, :longitude,  :detection_image_id, :horizontal_accuracy, :vertical_accuracy, :altitude])
+      |> cast(attrs, [:type, :content_url, :scale, :latitude, :longitude, :horizontal_accuracy, :vertical_accuracy, :altitude])
       |> cast_embed(:position)
       |> cast_embed(:euler_angles)
       |> cast_assoc(:likes)

@@ -8,7 +8,6 @@ defmodule ArWorldManager.Repo.Migrations.CreateRealityMarkers do
       add(:position, :map, default: "{}")
       add(:euler_angles, :map, default: "{}")
       add(:scale, :map, default: "{}")
-      add(:detection_image_id, references(:detection_images))
 
 
       timestamps()

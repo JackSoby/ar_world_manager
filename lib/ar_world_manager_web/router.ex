@@ -34,6 +34,9 @@ defmodule ArWorldManagerWeb.Router do
     post "/create-detection-image", DetectionImageController, :create_detection_image
     get "/get-detection-images", DetectionImageController, :list_detection_images
     post "/sign-up", UserController, :create
+    post "/sign-up", UserController, :create
+    post "/sign-in", UserController, :sign_in
+
   end
 
   scope "/api/v1", ArWorldManagerWeb do
@@ -42,6 +45,9 @@ defmodule ArWorldManagerWeb.Router do
     post "/create-comment", CommentController, :create
 
     get "/my-user", UserController, :show
+    post "/create-reality-markers", RealityMarkerController, :create_post
+    get "/get-reality-markers", RealityMarkerController, :get_posts
+    get "/my_user", UserController, :show
   end
 
 

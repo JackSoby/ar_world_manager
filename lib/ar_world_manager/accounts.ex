@@ -5,15 +5,15 @@ defmodule ArWorldManager.Accounts do
 
   import Ecto.Query, warn: false
   alias ArWorldManager.Repo
-
+  require IEx
   alias ArWorldManager.Accounts.User
 
   alias ArWorldManager.Guardian
   import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
 
 
-  def token_sign_in(email, password) do
-    case email_password_auth(email, password) do
+  def token_sign_in(check, password) do
+    case check_user(check, password) do
       {:ok, user} ->
         Guardian.encode_and_sign(user)
       _ ->
@@ -21,11 +21,22 @@ defmodule ArWorldManager.Accounts do
     end
   end
 
-  defp email_password_auth(email, password) when is_binary(email) and is_binary(password) do
-    with {:ok, user} <- get_by_email(email),
+
+
+  defp check_user(check, password) when is_binary(check) and is_binary(password) do
+    with {:ok, user} <- check_user(check),
     do: verify_password(password, user)
   end
 
+  defp check_user(check) do
+    case get_by_email(check) do
+      {:ok, user} ->
+        {:ok, user}
+
+      _->
+        get_by_username(check)
+    end
+  end
 
   defp get_by_email(email) when is_binary(email) do
     case Repo.get_by(User, email: email) do
@@ -37,6 +48,15 @@ defmodule ArWorldManager.Accounts do
     end
   end
 
+  defp get_by_username(username) when is_binary(username) do
+    case Repo.get_by(User, username: username) do
+      nil ->
+        dummy_checkpw()
+        {:error, "Login error."}
+      user ->
+        {:ok, user}
+    end
+  end
 
   defp verify_password(password, %User{} = user) when is_binary(password) do
     if checkpw(password, user.password_hash) do

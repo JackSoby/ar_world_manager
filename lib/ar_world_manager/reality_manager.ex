@@ -107,6 +107,7 @@ defmodule ArWorldManager.RealityManager do
     DetectionImage.changeset(detection_image, %{})
   end
 
+
   alias ArWorldManager.RealityManager.Schema.RealityMarker
 
   @doc """
