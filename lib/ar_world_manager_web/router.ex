@@ -28,8 +28,6 @@ defmodule ArWorldManagerWeb.Router do
   scope "/api/v1", ArWorldManagerWeb do
     pipe_through :api
 
-    post "/create-reality-markers", RealityMarkerController, :create_post
-    get "/get-reality-markers", RealityMarkerController, :get_posts
 
     post "/sign-up", UserController, :create
     post "/sign-in", UserController, :sign_in
@@ -38,7 +36,8 @@ defmodule ArWorldManagerWeb.Router do
 
   scope "/api/v1", ArWorldManagerWeb do
     pipe_through [:api, :jwt_authenticated]
-
+    post "/create-reality-markers", RealityMarkerController, :create_post
+    get "/get-reality-markers", RealityMarkerController, :get_posts
     get "/my_user", UserController, :show
   end
 

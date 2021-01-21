@@ -28,7 +28,6 @@ defmodule ArWorldManager.RealityManager.Schema.RealityMarker do
       |> cast(attrs, [:type, :content_url, :scale, :latitude, :longitude, :horizontal_accuracy, :vertical_accuracy, :altitude])
       |> cast_embed(:position)
       |> cast_embed(:euler_angles)
-    IO.inspect(res)
 
     res
   end
