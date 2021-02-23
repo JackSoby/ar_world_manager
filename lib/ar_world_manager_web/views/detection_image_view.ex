@@ -30,7 +30,7 @@ defmodule ArWorldManagerWeb.DetectionImageView do
       # longitude: reality_marker.longitude,
       type: reality_marker.type,
       contentUrl: reality_marker.content_url,
-      position: reality_marker.content_url,
+      position: return_srp(reality_marker.position),
       # comments:  render_many(
       #   reality_marker.comments,
       #   __MODULE__,
