@@ -3,8 +3,7 @@ defmodule ArWorldManager.RealityManager.Schema.RealityMarker do
   import Ecto.Changeset
   alias ArWorldManager.RealityManager.Structs.Cartesian
   alias ArWorldManager.RealityManager.Schema.DetectionImage
-  alias ArWorldManager.RealityManager.Schema.Like
-  alias ArWorldManager.RealityManager.Schema.Comment
+
   require IEx
 
 
@@ -21,22 +20,17 @@ defmodule ArWorldManager.RealityManager.Schema.RealityMarker do
     embeds_one(:position, Cartesian)
     embeds_one(:euler_angles, Cartesian)
     belongs_to(:detection_image, DetectionImage)
-    has_many(:likes, Like)
-    has_many(:comments, Comment)
+
 
     timestamps()
   end
 
   @doc false
   def changeset(reality_marker, attrs) do
-    res =
       reality_marker
       |> cast(attrs, [:type, :content_url, :scale, :latitude, :longitude, :horizontal_accuracy, :vertical_accuracy, :altitude])
       |> cast_embed(:position)
       |> cast_embed(:euler_angles)
-      |> cast_assoc(:likes)
 
-
-    res
   end
 end

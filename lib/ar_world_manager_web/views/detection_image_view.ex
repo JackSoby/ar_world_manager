@@ -10,6 +10,7 @@ defmodule ArWorldManagerWeb.DetectionImageView do
     %{
       id: detection_image.id,
       image_url: detection_image.image_url,
+      likes: length(detection_image.likes),
       reality_markers:
         render_many(
           detection_image.reality_markers,
@@ -25,17 +26,17 @@ defmodule ArWorldManagerWeb.DetectionImageView do
       id: reality_marker.id,
       content: reality_marker.content,
       scale: reality_marker.scale,
-      latitude: reality_marker.latitude,
-      longitude: reality_marker.longitude,
+      # latitude: reality_marker.latitude,
+      # longitude: reality_marker.longitude,
       type: reality_marker.type,
       contentUrl: reality_marker.content_url,
-      likes: length(reality_marker.likes),
-      comments:  render_many(
-        reality_marker.comments,
-        __MODULE__,
-        "comment.json",
-        as: :comment
-      )
+      position: reality_marker.content_url,
+      # comments:  render_many(
+      #   reality_marker.comments,
+      #   __MODULE__,
+      #   "comment.json",
+      #   as: :comment
+      # )
     }
   end
 

@@ -17,7 +17,8 @@ defmodule ArWorldManagerWeb.RealityMarkerView do
       longitude: reality_marker.longitude,
       altitude: reality_marker.altitude,
       type: reality_marker.type,
-      contentUrl: reality_marker.content_url
+      contentUrl: reality_marker.content_url,
+      likes: length(reality_marker.likes),
     }
   end
 

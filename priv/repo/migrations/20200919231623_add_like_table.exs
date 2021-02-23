@@ -3,7 +3,7 @@ defmodule ArWorldManager.Repo.Migrations.AddLikeTable do
 
   def change do
     create table(:likes) do
-      add(:reality_marker_id, references(:reality_markers))
+      add(:detection_image_id, references(:detection_images))
       add(:user_id, references(:users))
 
       timestamps()
